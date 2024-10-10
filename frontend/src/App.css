@@ -1,0 +1,19 @@
+.invalid-feedback {
+  display: block; /* Ensure feedback is shown */
+}
+// const validateForm = () => {
+  //     const newErrors = {};
+  //     if (!employee_id) {
+  //         newErrors.employee_id = "Employee ID is required."; 
+  //     }
+  //     if (!employee_name) newErrors.employee_name = "Employee Name is required.";
+  //     if (!department) newErrors.department = "Department is required.";
+  //     if (!sex) newErrors.sex = "Sex is required.";
+  //     if (!marital_status) newErrors.marital_status = "Marital Status is required.";
+  //     if (!salary) newErrors.salary = "Salary is required.";
+  //     if (!address) newErrors.address = "Address is required.";
+      
+  //     setErrors(newErrors);
+  //     return Object.keys(newErrors).length === 0; // Return true if no errors
+  // };
+  // if (!validateForm()) return; // Only submit if validation passes
