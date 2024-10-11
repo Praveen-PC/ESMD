@@ -24,6 +24,36 @@ router.post('/insert', (req, res) => {
     });
 });
 
+router.put('/update/:employee_id', (req, res) => {
+    const { employee_id } = req.params; 
+    const { employee_name, department, sex, marital_status, salary, address } = req.body;
+
+    
+    const sql = 'UPDATE employees SET employee_name=?, department=?, sex=?, marital_status=?, salary=?, address=? WHERE employee_id=?';
+    
+    db.query(sql, [employee_name, department, sex, marital_status, salary, address, employee_id], (err, result) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send("Error updating employee");
+        }
+        return res.status(200).send("Updated successfully");
+    });
+});
+
+
+router.delete('/deleteuser/:id', (req, res) => {
+    const { id } = req.params; // This should match your database field
+    const sql = 'DELETE FROM employees WHERE employee_id = ?'; // Ensure this matches the column name in your DB
+
+    db.query(sql, [id], (err) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'Error deleting user' });
+        }
+        return res.status(200).json('User data is deleted');
+    });
+});
+
 
 
 

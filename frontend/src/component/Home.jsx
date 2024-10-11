@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import axios from 'axios';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Home = () => {
     const [employee_id, setEmployeeid] = useState('');
@@ -11,9 +12,25 @@ const Home = () => {
     const [salary, setSalary] = useState('');
     const [address, setAddress] = useState('');
     const [errors, setErrors] = useState({});
+    const navigate = useNavigate();
+    const location = useLocation();
+    const employeeToEdit = location.state?.employee;
+
+    useEffect(() => {
+        if (employeeToEdit) {
+            
+            setEmployeeid(employeeToEdit.employee_id);
+            setEmployeename(employeeToEdit.employee_name);
+            setDepartment(employeeToEdit.department);
+            setSex(employeeToEdit.sex);
+            setMaritalstatus(employeeToEdit.marital_status);
+            setSalary(employeeToEdit.salary);
+            setAddress(employeeToEdit.address);
+        }
+    }, [employeeToEdit]);
 
     const handlesubmit = async (e) => {
-        e.preventDefault(); 
+        e.preventDefault();
 
         const newErrors = {};
         if (!employee_id) newErrors.employee_id = "Employee ID is required.";
@@ -26,12 +43,13 @@ const Home = () => {
 
         setErrors(newErrors);
         if (Object.keys(newErrors).length > 0) {
-            return; 
+            return;
         }
 
-        
         try {
-            const res = await axios.post('http://localhost:8080/api/insert', {
+            const endpoint = employeeToEdit ? `http://localhost:8080/api/update/${employee_id}` : 'http://localhost:8080/api/insert';
+            const method=employeeToEdit ? 'put':'post'
+            const res = await axios[method](endpoint, {
                 employee_id,
                 employee_name,
                 department,
@@ -41,8 +59,9 @@ const Home = () => {
                 address,
             });
             console.log(res.data);
-            alert("Form submitted successfully"); 
-            handlecancel(); 
+                alert(employeeToEdit?"Updated successfully":"Form submitted successfully");        
+            navigate('/tableview');
+            handlecancel();
         } catch (err) {
             console.error(err);
         }
@@ -63,19 +82,20 @@ const Home = () => {
         <>
             <Header />
             <div className="container shadow-lg p-4 mb-5 mt-5 bg-light rounded">
-                <h2 className="text-center p-3 text-primary">Employee Details</h2>
+                <h2 className="text-center p-3 text-primary">{employeeToEdit ? 'Edit Employee' : 'Employee Details'}</h2>
                 <form method='post'>
                     <div className="row">
                         <div className="col-12 col-md-6">
                             <div className="mb-3">
                                 <label htmlFor="employee_id" className="form-label fw-bold">Employee ID:</label>
                                 <input
-                                    type="number"
+                                    type="text"
                                     className='form-control bg-transparent'
                                     id="employee_id"
                                     placeholder="Enter Employee ID"
                                     value={employee_id}
                                     onChange={(e) => setEmployeeid(e.target.value)}
+                                    disabled={employeeToEdit ? true : false} 
                                 />
                                 {errors.employee_id && <div className="text-danger">{errors.employee_id}</div>}
                             </div>
@@ -106,9 +126,9 @@ const Home = () => {
                                     onChange={(e) => setDepartment(e.target.value)}
                                 >
                                     <option value="">Select Department</option>
-                                    <option value="Frontend">Frontend</option>
-                                    <option value="Backend">Backend</option>
-                                    <option value="Testing">Testing</option>
+                                    <option value="Developer">Developer</option>
+                                    <option value="Admin">Admin</option>
+                                    <option value="Manager">Manager</option>
                                 </select>
                                 {errors.department && <div className="text-danger">{errors.department}</div>}
                             </div>
@@ -200,7 +220,7 @@ const Home = () => {
                     </div>
                     <div className="btn-group" role="group" aria-label="Basic example">
                         <button type="button" className="btn btn-primary" onClick={handlesubmit}>
-                            <i className="bi bi-check2"></i> Submit
+                            <i className="bi bi-check2"></i> {employeeToEdit ? 'Update' : 'Submit'}
                         </button>
                         <button type="button" className="btn btn-secondary" onClick={handlecancel}>
                             <i className="bi bi-x-circle"></i> Cancel
