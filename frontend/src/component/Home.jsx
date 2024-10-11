@@ -86,7 +86,7 @@ const Home = () => {
     return (
         <>
             <Header />
-            <div className="container shadow-lg p-4 mb-5 mt-5 bg-light rounded">
+            <div className="container shadow-lg p-4 mb-5 mt-5  rounded">
                 <h2 className="text-center p-3 text-primary">{employeeToEdit ? 'Edit Employee' : 'Employee Details'}</h2>
                 <form method='post'>
                     <div className="row">
@@ -163,8 +163,8 @@ const Home = () => {
                                     type="radio"
                                     name="sex"
                                     id="male"
-                                    value="male"
-                                    checked={sex === 'male'}
+                                    value="Male"
+                                    checked={sex === 'Male'}
                                     onChange={(e) => setSex(e.target.value)}
                                 />
                                 <label className="form-check-label" htmlFor="male">Male</label>
@@ -175,13 +175,13 @@ const Home = () => {
                                     type="radio"
                                     name="sex"
                                     id="female"
-                                    value="female"
-                                    checked={sex === 'female'}
+                                    value="Female"
+                                    checked={sex === 'Female'}
                                     onChange={(e) => setSex(e.target.value)}
                                 />
                                 <label className="form-check-label" htmlFor="female">Female</label>
                             </div>
-                            {errors.sex && <div className="text-danger">{errors.sex}</div>}
+                            {errors.sex && <div className="text-danger"> {errors.sex}</div>}
                         </div>
                         <div className="col-12 col-md-6 d-flex align-items-center">
                             <label className="form-label me-3 fw-bold">Marital Status:</label>
@@ -191,8 +191,8 @@ const Home = () => {
                                     type="radio"
                                     name="marital_status"
                                     id="single"
-                                    value="single"
-                                    checked={marital_status === 'single'}
+                                    value="Single"
+                                    checked={marital_status === 'Single'}
                                     onChange={(e) => setMaritalstatus(e.target.value)}
                                 />
                                 <label className="form-check-label" htmlFor="single">Single</label>
@@ -203,8 +203,8 @@ const Home = () => {
                                     type="radio"
                                     name="marital_status"
                                     id="married"
-                                    value="married"
-                                    checked={marital_status === 'married'}
+                                    value="Married"
+                                    checked={marital_status === 'Married'}
                                     onChange={(e) => setMaritalstatus(e.target.value)}
                                 />
                                 <label className="form-check-label" htmlFor="married">Married</label>

@@ -1,19 +1,52 @@
-.invalid-feedback {
-  display: block; /* Ensure feedback is shown */
+/* styles.css */
+body {
+  background-color: #f8f9fa;
+  font-family: 'Arial', sans-serif;
 }
-// const validateForm = () => {
-  //     const newErrors = {};
-  //     if (!employee_id) {
-  //         newErrors.employee_id = "Employee ID is required."; 
-  //     }
-  //     if (!employee_name) newErrors.employee_name = "Employee Name is required.";
-  //     if (!department) newErrors.department = "Department is required.";
-  //     if (!sex) newErrors.sex = "Sex is required.";
-  //     if (!marital_status) newErrors.marital_status = "Marital Status is required.";
-  //     if (!salary) newErrors.salary = "Salary is required.";
-  //     if (!address) newErrors.address = "Address is required.";
-      
-  //     setErrors(newErrors);
-  //     return Object.keys(newErrors).length === 0; // Return true if no errors
-  // };
-  // if (!validateForm()) return; // Only submit if validation passes
+
+.container {
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-weight: bold;
+  color: #007bff;
+}
+
+.btn {
+  padding: 10px 20px;
+  border-radius: 20px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border: none;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+.form-label {
+  font-weight: bold;
+  color: #343a40;
+}
+
+.form-control {
+  border-radius: 8px;
+}
+
+.text-danger {
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
