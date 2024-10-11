@@ -68,14 +68,19 @@ const Home = () => {
     };
 
     const handlecancel = () => {
-        setEmployeeid('');
-        setEmployeename('');
-        setDepartment('');
-        setSex('');
-        setMaritalstatus('');
-        setSalary('');
-        setAddress('');
-        setErrors({});
+        if (!employeeToEdit){
+            setEmployeeid('');
+            setEmployeename('');
+            setDepartment('');
+            setSex('');
+            setMaritalstatus('');
+            setSalary('');
+            setAddress('');
+            setErrors({});
+        }else{
+            navigate('/tableview')
+        }
+      
     };
 
     return (
@@ -129,6 +134,7 @@ const Home = () => {
                                     <option value="Developer">Developer</option>
                                     <option value="Admin">Admin</option>
                                     <option value="Manager">Manager</option>
+                                    <option value="HR">HR</option>
                                 </select>
                                 {errors.department && <div className="text-danger">{errors.department}</div>}
                             </div>
@@ -137,7 +143,7 @@ const Home = () => {
                             <div className="mb-3">
                                 <label htmlFor="salary" className="form-label fw-bold">Salary:</label>
                                 <input
-                                    type="number"
+                                    type="text"
                                     className='form-control bg-transparent'
                                     id="salary"
                                     placeholder="Enter Salary"
